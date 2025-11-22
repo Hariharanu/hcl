@@ -1,6 +1,6 @@
 import './Login.css';
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import api from '../services/api';
 
 function Login() {
@@ -52,7 +52,7 @@ function Login() {
         </form>
 
         <a href="#" className="link">Forgot Password?</a>
-        <a href="#" className="link register">New User? Register here</a>
+        <Link to="register" className="link register" onClick={()=>navigate('/register')}>New User? Register here</Link>
 
       </div>
     </div>

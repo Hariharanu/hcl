@@ -12,6 +12,7 @@ const PatientRoutes = () => {
   return (
     <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="profile" element={<MyProfile />} />
         <Route path="goals" element={<WellnessGoals />} />
