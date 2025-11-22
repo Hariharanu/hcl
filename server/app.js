@@ -9,6 +9,7 @@ import morgan from "morgan";
 import authRoute from "./routes/authRoute.js";
 import patientRoute from "./routes/patientRoute.js";
 import providerRoute from "./routes/providerRoute.js";
+import wellnessRoute from "./routes/wellnessRoute.js";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.get("/", (req, res, next) => {
 app.use("/api/auth/", authRoute);
 app.use("/api/patient/", patientRoute);
 app.use("/api/provider/", providerRoute);
+app.use('/api/wellness/', wellnessRoute)
 
 
 app.use((err, req, res, next) => {
