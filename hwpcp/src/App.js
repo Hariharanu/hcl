@@ -5,6 +5,8 @@ import './App.css';
 import PatientLayout from './components/patient/PatientLayout';
 import Login from './components/Login';
 import Signup from './components/register';
+import Register from './components/register';
+import ProviderLayout from './components/provider/ProviderLayout';
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
         <Route path="/register" element={<Signup />} />  
         {/* All patient pages wrapped in layout */}
         <Route path="/patient/*" element={<PatientLayout />} />
+        <Route path="/provider/*" element={<ProviderLayout />} />
       </Routes>
     </Router>
   );
