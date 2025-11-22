@@ -44,7 +44,7 @@ async function fetchData(){
           <tr key={patient._id} style={{ borderBottom: '1px solid #e0e0e0' }}>
             <td style={{ padding: 8 }}>{patient.name}</td>
             <td style={{ padding: 8 }}>{patient.email}</td>
-            <td style={{ padding: 8 }}>{patient.weight} yrs</td>
+            <td style={{ padding: 8 }}>{patient.weight}</td>
             <td style={{ padding: 8 }}>{patient.bp}</td>
             
           </tr>

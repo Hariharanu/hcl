@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Link ,useNavigate} from "react-router-dom";
 
  function Register({ role }) {
+    const navigate=useNavigate();
   const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -136,6 +138,9 @@ import React, { useState } from "react";
       <button type="submit">Register</button>
 
       {message && <div className="alert">{message}</div>}
+
+              <Link to="/" className="link register" onClick={(e)=>{e.preventDefault(); navigate('/')}}>Login</Link>
+
     </form>
   );
 }

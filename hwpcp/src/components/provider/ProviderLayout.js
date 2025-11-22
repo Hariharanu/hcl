@@ -16,7 +16,7 @@ const PatientLayout = () => {
             <li><Link to="/provider/dashboard">Dashboard</Link></li>
             <li><Link to="/provider/profile">My Profile</Link></li>
             <li><Link to="/provider/messages">Messages</Link></li>
-            <li><Link to="/logout" onClick={()=>navigate('/')}>Logout</Link></li>
+            <li><Link to="/logout" onClick={(e)=>{e.preventDefault();navigate('/')}}>Logout</Link></li>
           </ul>
         </nav>
       </aside>

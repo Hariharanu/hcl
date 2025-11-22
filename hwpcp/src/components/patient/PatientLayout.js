@@ -6,6 +6,7 @@ import PatientRoutes from '../../routes/patient';
 
 const PatientLayout = () => {
   const navigate=useNavigate();
+  
   const[displayName,setDisplayName]=useState(localStorage.getItem('name'));
   
   return (
@@ -18,7 +19,7 @@ const PatientLayout = () => {
             <li><Link to="/patient/profile">My Profile</Link></li>
             <li><Link to="/patient/goals">Wellness Goals</Link></li>
             <li><Link to="/patient/messages">Messages</Link></li>
-            <li><Link to="/logout" onClick={()=>navigate('/')}>Logout</Link></li>
+            <li><Link to="/logout" onClick={(e)=>{e.preventDefault();navigate('/')}}>Logout</Link></li>
           </ul>
         </nav>
       </aside>
