@@ -55,3 +55,27 @@ export const addToWellnessTrack = async (req, res) => {
       .json({ message: "Server error", error: error.message });
   }
 };
+
+export const getWellnessTrack = async (req, res) => {
+  const { id } = req.user || {};
+
+  if (!id) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+
+  try {
+    const wellnessRecord = await wellnessModal.findOne({ userId: id });
+
+    if (!wellnessRecord) {
+      return res
+        .status(404)
+        .json({ message: "No wellness data found for this user" });
+    }
+
+    return res.status(200).json({ wellnessRecord });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
+  }
+};
