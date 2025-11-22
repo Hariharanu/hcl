@@ -2,6 +2,7 @@
 
 React.js
 React Bootstrap
+rechart -> To handle data visualization tables and charts.
 
 **Authentication**
 
@@ -24,7 +25,16 @@ Built dedicated dashboard pages for Patients and Providers.
 
 Integrated JWT-based authentication, including token generation and route protection.
 
-We can assing the Provider to the patient for consulatation
+We can assign the Provider to the patient for consulatation
+
+
+1. To run server 
+  cd server -> npm i -> npm run start
+
+2. to run the client 
+  cd hwpcp => npm i => npm start
+
+
 
 
 
