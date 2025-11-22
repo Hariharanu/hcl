@@ -1,221 +1,183 @@
-import { useState } from 'react';
+import React, { useState } from "react";
 
-function Register({ role }) {
+ function Register({ role }) {
+  const [message, setMessage] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    age: "",
+    weight: "",
+    bp: "",
+    exp: "",
+    specialization: "",
+    role: role,
+  });
 
-
-    
-const [message, setMessage] = useState('');
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '', 
-        age: '',
-        weight: '', 
-        bp: '',
-        exp: '',
-        specialization: '',
-        role: role   
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    const handleChange = (e) => {
-       
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log('Form Data Submitted:', formData);
-        
-        try {
-            const response = await fetch('http://localhost:3000/api/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: formData.name,
-                    email: formData.email,
-                    password: formData.password,
-                    role: role,
-                    age: formData.age,
-                    weight: formData.weight,
-                    bp: formData.bp,
-                    exp: formData.exp,
-                    specialization: formData.specialization,
-                 }),
-            });
-            const data = await response.json();
-            if (response.ok) {
-                setMessage('Registration successful!');
-            } else {
-                setMessage(data.message || 'Registration failed');
-            }
-        } catch (error) {
-            setMessage('An error occurred. Please try again.');
-        } 
-    };
-    return (
-        <div>
-            <form onSubmit={handleSubmit}>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Form Data Submitted:", formData);
 
-                <div class="mb-3 row">
-                    <label class="col-sm-2">Name:</label>
-                    <div class="col-sm-3">
-                        <input
-                            class="form-control"
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                </div>
+    try {
+      const response = await fetch("http://localhost:3000/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          role: role,
+          age: formData.age,
+          weight: formData.weight,
+          bp: formData.bp,
+          exp: formData.exp,
+          specialization: formData.specialization,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setMessage("Registration successful!");
+      } else {
+        setMessage(data.message || "Registration failed");
+      }
+    } catch (error) {
+      setMessage("An error occurred. Please try again.");
+    }
+  };
 
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="name"
+        placeholder="Full Name"
+        value={formData.name}
+        onChange={handleChange}
+        required
+      />
 
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={formData.email}
+        onChange={handleChange}
+        required
+      />
 
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={formData.password}
+        onChange={handleChange}
+        required
+      />
 
-                <div class="mb-3 row">
-                    <label class="col-sm-2">Email:</label>
-                    <div class="col-sm-3">
-                        <input
-                            class="form-control"
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label class="col-sm-2">Password:</label>
-                    <div class="col-sm-3">
-                        <input
-                            class="form-control"
-                            type="password"
-                            name="password"
+      {role === "PATIENT" && (
+        <>
+          <input
+            type="number"
+            name="age"
+            placeholder="Age"
+            value={formData.age}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="number"
+            name="weight"
+            placeholder="Weight"
+            value={formData.weight}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="number"
+            name="bp"
+            placeholder="BP"
+            value={formData.bp}
+            onChange={handleChange}
+            required
+          />
+        </>
+      )}
 
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                </div>
-                
-                {role === 'PATIENT' && (
-                    <div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-2">Age:</label>
-                            <div class="col-sm-3">
-                                <input
-                                    class="form-control"
-                                    name='age'
-                                    type="number"
-                                    value={formData.age}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-2">weight:</label>
-                            <div class="col-sm-3">
-                                <input
-                                    class="form-control"
-                                    type="number"
-                                    name="weight"
-                                    value={formData.weight}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-2">BP:</label>
-                            <div class="col-sm-3">
-                                <input
-                                    class="form-control"
-                                    name='bp'
-                                    type="number"
-                                    value={formData.bp}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                        </div>
-                    </div>
+      {role === "PROVIDER" && (
+        <>
+          <input
+            type="number"
+            name="exp"
+            placeholder="Experience (Years)"
+            value={formData.exp}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="specialization"
+            placeholder="Specialization"
+            value={formData.specialization}
+            onChange={handleChange}
+            required
+          />
+        </>
+      )}
 
-                )}
-                {role === 'PROVIDER' && (
-                    <>
+      <button type="submit">Register</button>
 
-                        <div class="mb-3 row">
-                            <label class="col-sm-2">Experinece:</label>
-                            <div class="col-sm-3">
-                                <input
-                                    class="form-control"
-                                    type="number"
-                                    name='exp'
-                                    value={formData.exp}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label class="col-sm-2">Specialisation:</label>
-                            <div class="col-sm-3">
-                                <input
-                                    class="form-control"
-                                    type="text"
-                                    value={formData.stream}
-                                    name = "specialization"
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                        </div>
-                    </>
-                )}
-
-
-                <div class="mb-3 row">
-                    <button type="submit" class="col-sm-1 btn btn-primary">Submit</button>
-                </div>
-
-
-            </form>
-            <div class="alert alert-info" role="alert">
-                     {message && <p>{message}</p>}
-            </div>
-           
-        </div>
-    );
+      {message && <div className="alert">{message}</div>}
+    </form>
+  );
 }
 
-
-
 export default function Signup() {
-    const [role,setRole]=useState('');
+  const [role, setRole] = useState("");
 
-    const handleRole=(e)=>{
-        setRole(e.target.value);
-        console.log(e.target.value);
-    }
-    return (    
-        <div>
-               <h3 class="">Welcome to Health and Wellness </h3>
-            
-            <div class="mb-3 row">
-                <span class="col-sm-2"> Doctor <input onClick={handleRole} class="col-sm-1" type="radio" name="wellnes" value="PROVIDER" /> </span>
-                 <span class="col-sm-2"> Patient<input onClick={handleRole} class="col-sm-1" type="radio" name="wellnes" value="PATIENT" /> </span>
+  const handleRole = (e) => {
+    setRole(e.target.value);
+  };
 
-            </div>
-            <Register role={role} />
+  return (
+    <div className="login-container">
+      <div className="login-box">
+
+        <h3 className="title">Welcome to Health and Wellness</h3>
+        <hr />
+        <h3>Register</h3>
+        <hr />
+        <div className="radio-group">
+          <label>
+            Doctor
+            <input
+              type="radio"
+              name="wellness"
+              value="PROVIDER"
+              onChange={handleRole}
+            />
+          </label>
+          <label>
+            Patient
+            <input
+              type="radio"
+              name="wellness"
+              value="PATIENT"
+              onChange={handleRole}
+            />
+          </label>
         </div>
-    );
-}       
 
+        {role && <Register role={role} />}
+      </div>
+    </div>
+  );
+}

@@ -15,8 +15,9 @@ function Login() {
         const res = await api.post(`/auth/login`,{"email":email,"password":password});
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('name', res.data.name);
+        localStorage.setItem('role', res.data.role);
         console.log(res.data)
-      navigate("/patient/dashboard");   // Redirect after login
+      navigate(`/${res.data.role.toLowerCase()}/dashboard`);   // Redirect after login
     } else {
       alert("Invalid credentials");
     }
