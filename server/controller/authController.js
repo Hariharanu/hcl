@@ -1,7 +1,5 @@
-// ...existing code...
 import userModal from "../models/userModal.js";
-import jwt from "jsonwebtoken"; // added
-// ...existing code...
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   const { name, email, password, role } = req.body;
@@ -14,7 +12,7 @@ export const register = async (req, res) => {
     });
     const userData = await user.save();
     const userObj = userData.toObject();
-    delete userObj.password; // hide password
+    delete userObj.password;
     res
       .status(201)
       .json({ message: "User registered successfully", user: userObj });
@@ -38,7 +36,6 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    // sign JWT
     const token = jwt.sign(
       { id: user._id, role: user.role, email: user.email },
       process.env.JWT_SECRET,

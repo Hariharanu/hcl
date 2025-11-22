@@ -1,11 +1,13 @@
 import express from "express";
-import { getAllProvider } from "../controller/patientController.js";
+import { assignProvider, getAllProvider } from "../controller/patientController.js";
+import { authenticate } from "../middleware/jwt.js";
+import { getAllPatient } from "../controller/providerController.js";
 
 
 const router = express.Router();
 
-router.get("/getAllPatient", getAllProvider);
+router.get("/getAllPatient", authenticate,  getAllPatient);
 
-// router.post("/assign/:patientID", regster);
+
 
 export default router;
